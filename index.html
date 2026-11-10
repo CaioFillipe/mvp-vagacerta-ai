@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VagaCerta AI | Recrutamento Inteligente e Carreira em TI</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; }
+        .hidden-view { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-brand-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="navigate('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent">
+                        VagaCerta<span class="text-brand-500">.AI</span>
+                    </span>
+                    <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-semibold bg-brand-600/30 text-indigo-300 rounded-full border border-brand-500/30">MVP RHTech TI</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-1">
+                <button onclick="navigate('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <i data-lucide="home" class="w-4 h-4"></i><span>Início</span>
+                </button>
+                <button onclick="navigate('dashboard')" id="nav-dashboard" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i><span>Painel</span>
+                </button>
+                <button onclick="navigate('jobs')" id="nav-jobs" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i><span>Vagas TI</span>
+                </button>
+                <button onclick="navigate('analyzer')" id="nav-analyzer" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-indigo-400"></i><span>Analisador IA</span>
+                </button>
+                <button onclick="navigate('career')" id="nav-career" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <i data-lucide="award" class="w-4 h-4"></i><span>Plano de Carreira</span>
+                </button>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <div id="upgrade-btn-container"></div>
+                <button onclick="resetData()" title="Reiniciar dados" class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                </button>
+                <div class="flex items-center space-x-2 pl-2 border-l border-slate-700 cursor-pointer" onclick="navigate('dashboard')">
+                    <img id="user-avatar" src="" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-indigo-500" />
+                    <div class="hidden lg:block text-left text-xs">
+                        <p id="user-name" class="font-semibold text-white"></p>
+                        <p id="user-role" class="text-slate-400"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        
+        <!-- HOME VIEW -->
+        <div id="view-home" class="view-section space-y-20 pb-16">
+            <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 text-white py-24 px-4 sm:px-6 lg:px-8">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="max-w-5xl mx-auto text-center relative z-10 space-y-8">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-600/20 border border-brand-500/30 text-indigo-300 text-xs font-semibold shadow-inner">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-indigo-400"></i>
+                        <span>A Revolução no Recrutamento Inteligente de TI</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
+                        Encontre a <span class="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">Vaga Certa</span> e saiba o que melhorar.
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-normal">
+                        Reunimos oportunidades exclusivas de TI, analisamos seu currículo vaga a vaga com inteligência artificial e geramos um plano prático de estudos para garantir sua contratação.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                        <button onclick="navigate('jobs')" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl shadow-xl shadow-indigo-600/30 transition flex items-center justify-center space-x-2 text-base">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i><span>Explorar Vagas de TI</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- DASHBOARD VIEW -->
+        <div id="view-dashboard" class="view-section hidden-view max-w-7xl mx-auto px-4 py-8 space-y-8">
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 sm:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center space-x-4">
+                    <img id="dash-avatar" src="" class="w-16 h-16 rounded-full border-2 border-indigo-400 shadow-md" />
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-black" id="dash-greeting"></h2>
+                        <p class="text-slate-300 text-sm" id="dash-subtitle"></p>
+                    </div>
+                </div>
+                <div id="dash-usage" class="bg-indigo-900/60 p-4 rounded-xl border border-indigo-500/30 flex flex-col items-center">
+                    <p class="text-xs text-indigo-200">Análises usadas este mês:</p>
+                    <p class="text-lg font-black text-white" id="dash-count"></p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-500 uppercase">Vagas Salvas</p>
+                        <p class="text-2xl font-black text-slate-900 mt-1" id="stat-saved">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-indigo-50 text-brand-600 rounded-xl flex items-center justify-center"><i data-lucide="bookmark-check"></i></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-500 uppercase">Análises Feitas</p>
+                        <p class="text-2xl font-black text-slate-900 mt-1" id="stat-analyses">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center"><i data-lucide="sparkles"></i></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-500 uppercase">Aderência ATS</p>
+                        <p class="text-2xl font-black text-emerald-600 mt-1" id="stat-score">0%</p>
+                    </div>
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center"><i data-lucide="bar-chart-3"></i></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-500 uppercase">Plano Carreira</p>
+                        <p class="text-2xl font-black text-slate-900 mt-1" id="stat-career">0%</p>
+                    </div>
+                    <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center"><i data-lucide="award"></i></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
+                <h3 class="text-lg font-black text-slate-900">Histórico de Análises de Currículo</h3>
+                <div id="analyses-list" class="space-y-4"></div>
+            </div>
+        </div>
+
+        <!-- JOBS VIEW -->
+        <div id="view-jobs" class="view-section hidden-view max-w-7xl mx-auto px-4 py-8 space-y-8">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full">Agregador de TI</span>
+                <h2 class="text-3xl font-black text-slate-900 mt-2">Vagas Disponíveis</h2>
+            </div>
+            <div id="jobs-list" class="space-y-4"></div>
+        </div>
+
+        <!-- ANALYZER VIEW -->
+        <div id="view-analyzer" class="view-section hidden-view max-w-7xl mx-auto px-4 py-8 space-y-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <h2 class="text-3xl font-black text-slate-900">Descubra o que falta no seu currículo</h2>
+                <p class="text-slate-600 text-sm">Nossa IA lê os requisitos da vaga e compara com seu perfil, apontando palavras-chave ausentes.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                    <h3 class="text-lg font-black text-slate-900">Dados da Vaga e Currículo</h3>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Selecionar Vaga</label>
+                        <select id="analyzer-job-select" class="w-full p-2 border border-slate-200 rounded-xl text-sm mb-4" onchange="updateAnalyzerDesc()"></select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Descrição da Vaga</label>
+                        <textarea id="analyzer-job-desc" rows="4" class="w-full p-3 border border-slate-200 rounded-xl text-xs"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mt-4 mb-1">Seu Currículo</label>
+                        <textarea id="analyzer-resume" rows="6" class="w-full p-3 border border-slate-200 rounded-xl text-xs">Rafael Costa
+Desenvolvedor Front-End Júnior
+Experiência com React, JavaScript, HTML, CSS, Git, Bootstrap.
+Projetos: E-commerce responsivo em React.</textarea>
+                    </div>
+
+                    <button onclick="runAnalysis()" id="btn-analyze" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl mt-4 flex justify-center items-center gap-2">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i> Executar Análise Inteligente
+                    </button>
+                </div>
+
+                <div id="analyzer-results" class="bg-slate-100 p-8 rounded-2xl border border-slate-200 flex items-center justify-center text-center text-slate-500">
+                    <p>Preencha os dados e clique em executar para ver o resultado da IA.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAREER VIEW -->
+        <div id="view-career" class="view-section hidden-view max-w-7xl mx-auto px-4 py-8 space-y-8">
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 text-white shadow-lg">
+                <h2 class="text-2xl font-black">Plano de Desenvolvimento Priorizado</h2>
+                <p class="text-slate-300 text-sm mt-2">Cursos e projetos recomendados baseados nas suas lacunas.</p>
+            </div>
+            <div id="career-list" class="space-y-4"></div>
+        </div>
+
+    </main>
+
+    <!-- Modal Premium -->
+    <div id="modal-premium" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 hidden-view p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center space-y-4">
+            <h2 class="text-2xl font-black text-slate-900">Seja Premium</h2>
+            <p class="text-slate-600 text-sm">Desbloqueie análises ilimitadas e alertas em tempo real.</p>
+            <div class="text-4xl font-black text-slate-900 py-4">R$ 24,90 <span class="text-sm font-normal text-slate-500">/mês</span></div>
+            <button onclick="confirmUpgrade()" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl">Simular Assinatura (Demonstração)</button>
+            <button onclick="closeModal()" class="text-sm text-slate-500 mt-2 hover:underline">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
